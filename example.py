@@ -30,12 +30,15 @@ layout = [
     Layout(211, 217, 'FATCOT'),
     Layout(218, 230, 'PTOEXE'),
     Layout(231, 242, 'CODISI'),
-    Layout(243, 245, 'DISMES'),
+    Layout(243, 245, ),
 ]
 
 
 fixed_file = FixedFile.read_text(
     'data/COTAHIST_A2021_AMZ.txt', layout=layout, ignore_index=[0, -1])
 
-for row in fixed_file:
+print(fixed_file.columns)
+for row in fixed_file.data:
     print(row)
+
+fixed_file.to_csv('data/amz.csv')

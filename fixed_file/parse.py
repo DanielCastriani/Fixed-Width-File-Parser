@@ -4,6 +4,12 @@ from typing import List
 
 
 class FixedFile:
+    data: list
+    columns: list
+
+    def __init__(self, data: list, columns: list) -> None:
+        self.data = data
+        self.columns = columns
 
     @classmethod
     def __parse_line(cls, line: str, layout: List[Layout]):
@@ -31,4 +37,19 @@ class FixedFile:
                 for index in ignore_index:
                     lines.pop(index)
 
-            return [cls.__parse_line(line, layout) for line in lines]
+            data = ([cls.__parse_line(line, layout) for line in lines])
+            columns = [h.name if h.name else 'Unamed:%d' %
+                       i for i, h in enumerate(layout)]
+
+            return FixedFile(data, columns)
+
+    def to_csv(self, path: str, sep=',', columns_name=True):
+        with open(path, 'w') as file:
+            if columns_name:
+                data = [[str(col) for col in row] for row in self.data]
+                csv = [sep.join(row) for row in data]
+
+                if columns_name:
+                    csv.insert(0, sep.join(self.columns))
+
+                file.write('\n'.join(csv))
