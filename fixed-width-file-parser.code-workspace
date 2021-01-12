@@ -1,0 +1,41 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"ms-python.python",
+			"ms-python.vscode-pylance",
+		]
+	},
+	"settings": {
+		"files.exclude": {
+			"venv/": true,
+			"*/__pycache__/": true
+		},
+		"python.languageServer": "Pylance",
+		"python.analysis.diagnosticMode": "workspace",
+		"python.analysis.typeCheckingMode": "basic"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Current File",
+				"type": "python",
+				"request": "launch",
+				"program": "${file}",
+				"console": "integratedTerminal"
+			},
+			{
+				"name": "Example",
+				"type": "python",
+				"request": "launch",
+				"program": "example.py",
+				"console": "integratedTerminal"
+			}
+		]
+	}
+}
